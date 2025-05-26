@@ -3,6 +3,8 @@ using OpenTelemetry.Trace;
 
 namespace NameProject.Server.Configs;
 
+/// A static class that provides configuration methods for setting up OpenTelemetry
+/// tracing, metrics, and exporters in an application.
 public static class OpenTelemetryConfig
 {
     /// Configures OpenTelemetry for an application, including metrics and tracing instrumentation,

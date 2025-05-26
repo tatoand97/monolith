@@ -1,5 +1,4 @@
 using NameProject.Server.Configs;
-using NameProject.Server.Handlers;
 using NameProject.Server.Middlewares;
 using NameProject.Server.ServiceCollections;
 
@@ -9,9 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.ConfigureAppConfiguration();
 
 builder.Host.UseSerilogCustom();
-builder.Services.AddProblemDetails();
+
 builder.Services.SetupCors();
-builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.SetupExceptions();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerConfiguration();
@@ -31,7 +30,7 @@ app.UseCors(CorsConfig.MyPolicy);
 app.UseHttpsRedirection();
 app.UseExceptionHandler();
 
-app.UseMiddleware<LogContextTraceMiddleware>();
+app.UseCustomMiddlewares();
 
 app.UseAzureAppConfiguration();
 

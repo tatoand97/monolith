@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using Serilog.Enrichers.Sensitive;
+using Serilog.Sinks.OpenTelemetry;
 
 namespace NameProject.Server.Configs;
 
@@ -9,32 +10,21 @@ namespace NameProject.Server.Configs;
 public static class SerilogConfig
 {
     /// <summary>
-    /// Configures Serilog logging for the application and adds it to the provided host builder.
+    /// Configures Serilog logging for the application and integrates it with the specified host builder.
     /// </summary>
-    /// <param name="hostBuilder">The IHostBuilder instance to which the Serilog logger and logging configuration are added.</param>
-    /// <returns>The modified IHostBuilder with Serilog logging configured.</returns>
-    public static IHostBuilder UseSerilogCustom(this IHostBuilder hostBuilder)
+    /// <param name="hostBuilder">The IHostBuilder instance to configure with Serilog and application-specific logging settings.</param>
+    /// <returns>The updated IHostBuilder with Serilog logging integrated.</returns>
+    public static void UseSerilogCustom(this IHostBuilder hostBuilder)
     {
         hostBuilder.UseSerilog();
 
-        hostBuilder.ConfigureServices(services =>
-        {
-            services.AddLoggingSerilog();
-        });
-        
-        return hostBuilder;
+        hostBuilder.ConfigureServices(_ => { AddLoggingSerilog(); });
     }
-
-
-    /// <summary>
-    /// Configures Serilog logging for the application and registers it in the service collection.
-    /// </summary>
-    /// <param name="services">The service collection to which the Serilog logger is added.</param>
-    /// <returns>The modified service collection with Serilog logging configured.</returns>
-    private static IServiceCollection AddLoggingSerilog(this IServiceCollection services)
+    
+    private static void AddLoggingSerilog()
     {
         const string
-            serviceName = "NameProject"; //Aquí se configura el nombre del servicio como aparece en el enviroment
+            serviceName = "NameProject"; //Service name
         var otlpEndpoint = Environment.GetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT");
 
         Log.Logger = new LoggerConfiguration()
@@ -57,13 +47,12 @@ public static class SerilogConfig
             .WriteTo.OpenTelemetry(options =>
             {
                 options.Endpoint = otlpEndpoint;
+                options.Protocol = OtlpProtocol.HttpProtobuf;
                 options.ResourceAttributes = new Dictionary<string, object>
                 {
                     ["service.name"] = serviceName,
                 };
             })
             .CreateLogger();
-        
-        return services;
     }
 }
