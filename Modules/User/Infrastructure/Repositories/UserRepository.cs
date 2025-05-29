@@ -13,6 +13,5 @@ public class UserRepository(UserDbContext dbContext) : IUserRepository
     public async Task InsertAsync(User user, CancellationToken cancellationToken = default)
     {
         await dbContext.Users.AddAsync(user, cancellationToken);
-        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }
