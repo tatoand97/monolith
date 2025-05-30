@@ -1,5 +1,4 @@
 ﻿using Application.Mappers;
-using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.Commands.CreateUser;
