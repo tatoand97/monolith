@@ -23,7 +23,7 @@ public static class PathSanitization
     /// </summary>
     /// <param name="path">The path string to be checked for malicious content.</param>
     /// <returns>Returns true if the path matches any predefined malicious patterns, otherwise false.</returns>
-    public static bool IsMalicius(string path)
+    public static bool IsMalicious(string path)
         => SPatterns.Any(pattern => {
             var matchTimeout = TimeSpan.FromMilliseconds(500);
             return Regex.IsMatch(path, pattern, RegexOptions.IgnoreCase, matchTimeout);
