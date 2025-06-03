@@ -10,7 +10,7 @@ public class UserRepository(UserDbContext dbContext) : GenericRepository<User,Us
 
     public async Task<User?> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _dbContext.Users.FindAsync([id, cancellationToken], cancellationToken: cancellationToken);
+        return await _dbContext.Users.FindAsync(new object?[] { id }, cancellationToken: cancellationToken);
     }
 
     public async Task InsertAsync(User user, CancellationToken cancellationToken = default)
