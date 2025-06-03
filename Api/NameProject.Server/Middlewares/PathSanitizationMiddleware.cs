@@ -11,7 +11,7 @@ public class PathSanitizationMiddleware
     {
         var originalPath = context.Request.Path.Value ?? "";
         logger.LogInformation("Request Path: {OriginalPath}", originalPath);
-        if (PathSanitization.IsMalicius(originalPath))
+        if (PathSanitization.IsMalicious(originalPath))
         {
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
             await context.Response.WriteAsync("Invalid Request Path");
