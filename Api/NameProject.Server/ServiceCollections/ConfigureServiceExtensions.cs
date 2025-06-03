@@ -9,10 +9,11 @@ namespace NameProject.Server.ServiceCollections;
 [ExcludeFromCodeCoverage]
 public static class ConfigureServiceExtensions
 {
-    /// Configures Swagger services for the application.
-    /// This method sets up Swagger document generation with specified metadata for the API.
+    /// <summary>
+    /// Adds and configures Swagger services for the API.
+    /// </summary>
     /// <param name="services">
-    /// The <see cref="IServiceCollection"/> used to configure the dependency injection container.
+    /// The <see cref="IServiceCollection"/> to which the Swagger services will be added.
     /// </param>
     public static void AddSwaggerConfiguration(this IServiceCollection services)
     {

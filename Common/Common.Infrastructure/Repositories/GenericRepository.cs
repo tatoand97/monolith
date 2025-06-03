@@ -10,7 +10,7 @@ public class GenericRepository<TEntity, TContext>(TContext context)
     private readonly DbSet<TEntity> _set = context.Set<TEntity>();
 
     public async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken ct = default) =>
-        await _set.FindAsync([id], ct);
+        await _set.FindAsync(new object?[] { id }, ct);
 
     public async Task<IReadOnlyList<TEntity>> ListAsync(
         Expression<Func<TEntity, bool>>? predicate = null,
