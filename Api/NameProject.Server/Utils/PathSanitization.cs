@@ -24,8 +24,19 @@ public static class PathSanitization
     /// <param name="path">The path string to be checked for malicious content.</param>
     /// <returns>Returns true if the path matches any predefined malicious patterns, otherwise false.</returns>
     public static bool IsMalicius(string path)
-        => SPatterns.Any(pattern => {
+        => SPatterns.Any(pattern =>
+        {
             var matchTimeout = TimeSpan.FromMilliseconds(500);
             return Regex.IsMatch(path, pattern, RegexOptions.IgnoreCase, matchTimeout);
         });
+
+    /// <summary>
+    /// Alias for <see cref="IsMalicius"/> maintained for backward compatibility.
+    /// </summary>
+    /// <param name="path">Request path to validate.</param>
+    /// <returns>
+    /// Returns <c>true</c> when the provided path matches one of the malicious
+    /// patterns; otherwise <c>false</c>.
+    /// </returns>
+    public static bool IsMalicious(string path) => IsMalicius(path);
 }

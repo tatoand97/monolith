@@ -26,8 +26,9 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
-    <ItemGroup>
+  <ItemGroup>
       <ProjectReference Include="..\..\Presentation\Presentation.csproj" />
-    </ItemGroup>
+      <ProjectReference Include="..\..\..\..\Api\NameProject.Server\NameProject.Server.csproj" />
+  </ItemGroup>
 
 </Project>
