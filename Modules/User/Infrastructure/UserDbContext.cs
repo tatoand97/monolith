@@ -12,7 +12,5 @@ public class UserDbContext(DbContextOptions<UserDbContext> options) : DbContext(
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<User>().ToCollection("users");
-
-        base.OnModelCreating(modelBuilder);
     }
 }
