@@ -14,7 +14,7 @@ public class UnitOfWork(UserDbContext dbContext) : IUnitOfWork
         return await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public virtual void Dispose(bool disposing)
+    protected virtual void Dispose(bool disposing)
     {
         if (!_disposed && disposing)
         {

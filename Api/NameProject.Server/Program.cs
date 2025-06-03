@@ -1,13 +1,22 @@
+using Common.Presentation.Config;
 using NameProject.Server.Configs;
-using NameProject.Server.Middlewares;
 using NameProject.Server.ServiceCollections;
+using Wolverine;
+using Wolverine.FluentValidation;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddModulesConfiguration();
+
 builder.ConfigureAppConfiguration();
 
 builder.Host.UseSerilogCustom();
+
+builder.Host.UseWolverine(options =>
+{
+    options.UseFluentValidation(RegistrationBehavior.ExplicitRegistration);
+});
 
 builder.Services.SetupCors();
 builder.Services.SetupExceptions();

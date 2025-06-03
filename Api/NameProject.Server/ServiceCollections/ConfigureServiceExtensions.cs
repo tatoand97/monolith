@@ -2,6 +2,7 @@
 using Azure.Identity;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 
 namespace NameProject.Server.ServiceCollections;
 
@@ -62,5 +63,10 @@ public static class ConfigureServiceExtensions
                     .SetRefreshInterval(TimeSpan.FromMinutes(durationCacheSeconds));
             }).ConfigureKeyVault(vaultOptions => vaultOptions.SetCredential(new DefaultAzureCredential()));
         });
+    }
+
+    public static void AddMongoClient(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddSingleton<MongoClient>(_ => new MongoClient(configuration.GetConnectionString("MongoDb:StringConnection")));
     }
 }
