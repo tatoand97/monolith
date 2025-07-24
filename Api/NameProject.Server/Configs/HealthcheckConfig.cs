@@ -1,18 +1,18 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using NameProject.Server.Utils.HealthChecks;
 
 namespace NameProject.Server.Configs;
 
 [ExcludeFromCodeCoverage]
 public static class HealthcheckConfig
 {
-
-    public static IServiceCollection AddHealthChecks(this IServiceCollection services)
+    public static IServiceCollection ConfigureHealthCheckServices(this IServiceCollection services)
     {
-        services.AddHealthChecks();
-            
-            
-            return services;
+        services.AddHealthChecks()
+            .AddCheck<CosmosMongoHealthCheck>("cosmos-mongo", tags: ["ready"]);
+
+        return services;
     }
     
     public static IEndpointRouteBuilder ConfigureHealthChecks(this IEndpointRouteBuilder builder)
