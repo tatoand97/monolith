@@ -1,5 +1,7 @@
-﻿using Serilog;
+﻿using NameProject.Server.Utils;
+using Serilog;
 using Serilog.Enrichers.Sensitive;
+using Serilog.Events;
 using Serilog.Sinks.OpenTelemetry;
 
 namespace NameProject.Server.Configs;
@@ -16,20 +18,19 @@ public static class SerilogConfig
     /// <returns>The updated IHostBuilder with Serilog logging integrated.</returns>
     public static void UseSerilogCustom(this IHostBuilder hostBuilder)
     {
+        AddLoggingSerilog();
         hostBuilder.UseSerilog();
-
-        hostBuilder.ConfigureServices(_ => { AddLoggingSerilog(); });
     }
     
     private static void AddLoggingSerilog()
     {
-        const string
-            serviceName = "NameProject"; //Service name
-        var otlpEndpoint = Environment.GetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT");
+        var serviceName = Environment.GetEnvironmentVariable("OTEL_SERVICE_NAME") ?? string.Empty; //Service name
+        var otlpEndpoint = Environment.GetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT") ?? string.Empty;
 
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Information()
             .Enrich.FromLogContext()
+            .Enrich.With<ActivityEnricher>()
             .Enrich.WithSensitiveDataMasking(options =>
             {
                 options.MaskingOperators =
@@ -52,6 +53,7 @@ public static class SerilogConfig
                 {
                     ["service.name"] = serviceName,
                 };
+                options.RestrictedToMinimumLevel = LogEventLevel.Warning;
             })
             .CreateLogger();
     }

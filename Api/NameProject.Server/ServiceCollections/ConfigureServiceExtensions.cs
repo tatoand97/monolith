@@ -3,6 +3,7 @@ using Azure.Identity;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
+using MongoDB.Driver.Core.Extensions.DiagnosticSources;
 
 namespace NameProject.Server.ServiceCollections;
 
@@ -68,6 +69,12 @@ public static class ConfigureServiceExtensions
 
     public static void AddMongoClient(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton<MongoClient>(_ => new MongoClient(configuration.GetConnectionString("MongoDb:StringConnection")));
-    }
+        services.AddSingleton<MongoClient>(_ =>
+        {
+            var dbConnection = configuration.GetConnectionString("MongoDb:StringConnection");
+            var clientSettings = MongoClientSettings.FromConnectionString(dbConnection);
+            clientSettings.ClusterConfigurator = builder => builder.Subscribe(new DiagnosticsActivityEventSubscriber());
+            return new MongoClient(clientSettings);
+        });
+}
 }

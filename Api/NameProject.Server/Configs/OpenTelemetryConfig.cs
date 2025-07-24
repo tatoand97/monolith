@@ -1,4 +1,6 @@
-﻿using OpenTelemetry.Metrics;
+﻿using System.Reflection;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
 namespace NameProject.Server.Configs;
@@ -25,10 +27,19 @@ public static class OpenTelemetryConfig
             {
                 metrics.AddRuntimeInstrumentation()
                     .AddProcessInstrumentation()
+                    .AddAspNetCoreInstrumentation()
                     .AddBuiltInMetrics();
             })
             .WithTracing(tracing =>
             {
+                tracing.AddSource("MongoDB.Driver.Core.Extensions.DiagnosticSources");
+                tracing.SetResourceBuilder(
+                    ResourceBuilder.CreateDefault()
+                        .AddService(
+                            serviceName: Environment.GetEnvironmentVariable("OTEL_SERVICE_NAME") ?? "Unknown",
+                            serviceVersion: Assembly.GetExecutingAssembly().GetName().Version?.ToString(),
+                            serviceInstanceId: Environment.MachineName
+                        ));
                 tracing.AddHttpClientInstrumentation()
                     .AddEntityFrameworkCoreInstrumentation()
                     .AddAspNetCoreInstrumentation()
@@ -40,7 +51,7 @@ public static class OpenTelemetryConfig
         return services;
     }
 
-    private static IServiceCollection AddOpenTelemetryExporters(this IServiceCollection services)
+    private static void AddOpenTelemetryExporters(this IServiceCollection services)
     {
         var otlpEndpoint = Environment.GetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT");
 
@@ -61,11 +72,9 @@ public static class OpenTelemetryConfig
                     opt.Endpoint = new Uri(otlpEndpoint);
             });
         });
-
-        return services;
     }
     
-    private static MeterProviderBuilder AddBuiltInMetrics(this MeterProviderBuilder builder) =>
+    private static void AddBuiltInMetrics(this MeterProviderBuilder builder) =>
     builder.AddMeter("Microsoft.AspNetCore.Hosting",
         "Microsoft.AspNetCore.Server.Kestrel",
         "Microsoft.AspNetCore.Http.Connections",

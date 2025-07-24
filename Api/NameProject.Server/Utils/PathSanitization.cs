@@ -29,14 +29,4 @@ public static class PathSanitization
             var matchTimeout = TimeSpan.FromMilliseconds(500);
             return Regex.IsMatch(path, pattern, RegexOptions.IgnoreCase, matchTimeout);
         });
-
-    /// <summary>
-    /// Alias for <see cref="IsMalicius"/> maintained for backward compatibility.
-    /// </summary>
-    /// <param name="path">Request path to validate.</param>
-    /// <returns>
-    /// Returns <c>true</c> when the provided path matches one of the malicious
-    /// patterns; otherwise <c>false</c>.
-    /// </returns>
-    public static bool IsMalicious(string path) => IsMalicius(path);
 }

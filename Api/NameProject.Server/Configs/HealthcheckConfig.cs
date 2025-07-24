@@ -9,8 +9,8 @@ public static class HealthcheckConfig
 
     public static IServiceCollection AddHealthChecks(this IServiceCollection services)
     {
-        services.AddHealthChecks()
-            .AddAzureAppConfiguration();
+        services.AddHealthChecks();
+            
             
             return services;
     }
