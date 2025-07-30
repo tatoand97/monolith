@@ -1,5 +1,4 @@
 using NameProject.Server.Utils;
-using Xunit;
 
 namespace User.Test;
 

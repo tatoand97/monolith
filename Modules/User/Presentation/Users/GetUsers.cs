@@ -1,4 +1,7 @@
-﻿using Common.Presentation.Endpoint;
+﻿using Common.Domain.Pagination;
+using Common.Domain.Responses;
+using Common.Presentation.Endpoint;
+using User.Application.DTOs;
 using Wolverine;
 
 namespace User.Presentation.Users;
@@ -12,10 +15,11 @@ public class GetUsers(IMessageBus messageBus) : IEndpoint
             .WithName("Users.Get");
     }
 
-    private static Task<IResult> Handle(CancellationToken ct)
+    private async Task<IResult> Handle([AsParameters] GetUsers query, CancellationToken ct)
     {
-        //await messageBus.InvokeAsync(request, ct);
+        var pagedUsers = await messageBus.InvokeAsync<PagedList<UserDto>>(query, ct);
+        var response = PagedResponse<UserDto>.FromPagedList(pagedUsers, "Usuarios obtenidos exitosamente");
 
-        return Task.FromResult(Results.Ok());
+        return Results.Ok(response);
     }
 }

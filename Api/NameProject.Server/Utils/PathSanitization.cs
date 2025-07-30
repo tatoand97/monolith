@@ -9,7 +9,7 @@ public static class PathSanitization
 {
     private static readonly string[] SPatterns =
     [
-        @"//",
+        "//",
         @"\.\.",
         @"\$",
         @"{.*}",

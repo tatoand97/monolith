@@ -2,7 +2,6 @@ using Common.Presentation.Config;
 using NameProject.Server.Configs;
 using NameProject.Server.ServiceCollections;
 using NameProject.Server.Utils.Validation;
-using User.Application.Commands.CreateUser;
 using User.Presentation;
 using Wolverine;
 using Wolverine.FluentValidation;

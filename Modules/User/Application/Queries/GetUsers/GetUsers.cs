@@ -1,6 +1,12 @@
-﻿namespace User.Application.Queries.GetUsers;
+﻿using Common.Domain.Pagination;
 
-public class GetUsers
+namespace User.Application.Queries.GetUsers;
+
+public abstract class GetUsers(int pageNumber = 1, int pageSize = 10)
 {
-    
+    public PaginationParams ToPaginationParams() => new()
+    {
+        PageNumber = pageNumber,
+        PageSize = pageSize
+    };
 }

@@ -1,6 +1,3 @@
 ﻿namespace User.Application.Queries.GetUserById;
 
-public class GetUserById
-{
-    
-}
+public record GetUserById(Guid UserId);

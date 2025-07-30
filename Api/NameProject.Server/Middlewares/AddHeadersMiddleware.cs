@@ -4,8 +4,6 @@ public class AddHeadersMiddleware(RequestDelegate requestDelegate)
 {
     public async Task InvokeAsync(HttpContext context)
     {
-        var path = context.Request.Path.Value?.ToLower() ?? "";
-
         context.Response.OnStarting(() =>
         {
             context.Response.Headers.Append("X-Content-Type-Options", "nosniff");

@@ -51,7 +51,7 @@ public static class SerilogConfig
                 options.Protocol = OtlpProtocol.HttpProtobuf;
                 options.ResourceAttributes = new Dictionary<string, object>
                 {
-                    ["service.name"] = serviceName,
+                    ["service.name"] = serviceName
                 };
                 options.RestrictedToMinimumLevel = LogEventLevel.Warning;
             })

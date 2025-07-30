@@ -26,6 +26,5 @@ public sealed class UnitOfWork(UserDbContext dbContext) : IUnitOfWork
     public void Dispose()
     {
         Dispose(true);
-        GC.SuppressFinalize(this);
     }
 }

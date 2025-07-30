@@ -18,11 +18,11 @@ public static class UserModule
     /// <param name="configuration">The application configuration used to configure module dependencies.</param>
     public static void SetupUserModule(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddApplicationModule(configuration);
-        //services.AddInfrastructure(configuration);
+        services.AddApplicationModule();
+        services.AddInfrastructure(configuration);
     }
 
-    private static void AddApplicationModule(this IServiceCollection services, IConfiguration configuration)
+    private static void AddApplicationModule(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly);
     }
