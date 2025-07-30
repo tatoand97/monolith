@@ -1,13 +1,12 @@
-﻿using Application.Commands.CreateUser;
-using Domain.Entities;
+﻿using User.Application.Commands.CreateUser;
 
-namespace Application.Mappers;
+namespace User.Application.Mappers;
 
 public static class UserMapper
 {
-    public static CreateUser ToCreateDto(User user) => new(user.Email, user.Password, user.Name, user.Surname);
+    public static CreateUser ToCreateDto(Domain.Entities.UserEntity userEntity) => new(userEntity.Email, userEntity.Password, userEntity.Name, userEntity.Surname);
     
-    public static User ToEntity(CreateUser user) => new()
+    public static Domain.Entities.UserEntity ToEntity(CreateUser user) => new()
     {
         Email = user.Email,
         Password = user.Password,

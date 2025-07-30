@@ -1,7 +1,6 @@
-﻿using Application.Mappers;
-using Domain.Interfaces;
+﻿using User.Application.Mappers;
 
-namespace Application.Commands.CreateUser;
+namespace User.Application.Commands.CreateUser;
 
 public class CreateUserHandler(IUnitOfWork unitOfWork)
 {

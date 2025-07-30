@@ -1,4 +1,4 @@
-﻿namespace Domain.Exceptions;
+﻿namespace User.Domain.Exceptions;
 
 public class UserNotFoundException : Exception
 {

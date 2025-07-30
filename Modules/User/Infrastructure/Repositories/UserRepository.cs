@@ -1,19 +1,19 @@
 ﻿using Common.Infrastructure.Repositories;
-using Domain.Entities;
-using Domain.Interfaces;
+using User.Domain.Entities;
+using User.Domain.Interfaces;
 
-namespace Infrastructure.Repositories;
+namespace User.Infrastructure.Repositories;
 
-public class UserRepository(UserDbContext dbContext) : GenericRepository<User,UserDbContext>(dbContext),IUserRepository
+public class UserRepository(UserDbContext dbContext) : GenericRepository<UserEntity,UserDbContext>(dbContext),IUserRepository
 {
     private readonly UserDbContext _dbContext = dbContext;
 
-    public async Task<User?> GetAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<UserEntity?> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _dbContext.Users.FindAsync(new object?[] { id }, cancellationToken: cancellationToken);
+        return await _dbContext.Users.FindAsync([id], cancellationToken: cancellationToken);
     }
 
-    public async Task InsertAsync(User user, CancellationToken cancellationToken = default)
+    public async Task InsertAsync(UserEntity user, CancellationToken cancellationToken = default)
     {
         await _dbContext.Users.AddAsync(user, cancellationToken);
     }

@@ -4,6 +4,8 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AssemblyName>User.Application</AssemblyName>
+        <RootNamespace>User.Application</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,7 +14,6 @@
 
     <ItemGroup>
       <Folder Include="Dtos\" />
-      <Folder Include="Queries\" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,5 +1,5 @@
-﻿using Application.Commands.CreateUser;
-using Common.Presentation.Endpoint;
+﻿using Common.Presentation.Endpoint;
+using User.Application.Commands.CreateUser;
 using Wolverine;
 
 namespace User.Presentation.Users;

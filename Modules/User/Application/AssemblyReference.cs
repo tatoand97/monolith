@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Application;
+namespace User.Application;
 
 public static class AssemblyReference
 {

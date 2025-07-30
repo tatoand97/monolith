@@ -1,10 +1,10 @@
 ﻿using Common.Domain.Interfaces;
-using Domain.Entities;
+using User.Domain.Entities;
 
-namespace Domain.Interfaces;
+namespace User.Domain.Interfaces;
 
-public interface IUserRepository : IGenericRepository<User>
+public interface IUserRepository : IGenericRepository<UserEntity>
 {
-    Task<User?> GetAsync(Guid id, CancellationToken cancellationToken = default);
-    Task InsertAsync(User user, CancellationToken cancellationToken = default);
+    Task<UserEntity?> GetAsync(Guid id, CancellationToken cancellationToken = default);
+    Task InsertAsync(UserEntity userEntity, CancellationToken cancellationToken = default);
 }

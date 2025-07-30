@@ -1,6 +1,6 @@
-﻿using Domain.Interfaces;
+﻿using User.Domain.Interfaces;
 
-namespace Infrastructure.Repositories;
+namespace User.Infrastructure.Repositories;
 
 public sealed class UnitOfWork(UserDbContext dbContext) : IUnitOfWork
 {
