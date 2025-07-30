@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Repositories;
 
-public class UnitOfWork(UserDbContext dbContext) : IUnitOfWork
+public sealed class UnitOfWork(UserDbContext dbContext) : IUnitOfWork
 {
     private UserRepository? _userRepository;
     private bool _disposed;
@@ -14,7 +14,7 @@ public class UnitOfWork(UserDbContext dbContext) : IUnitOfWork
         return await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    protected virtual void Dispose(bool disposing)
+    private void Dispose(bool disposing)
     {
         if (!_disposed && disposing)
         {

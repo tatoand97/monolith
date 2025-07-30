@@ -52,6 +52,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Common\Common.Presentation\Common.Presentation.csproj" />
+      <ProjectReference Include="..\..\Modules\User\Presentation\Presentation.csproj" />
     </ItemGroup>
 
 </Project>

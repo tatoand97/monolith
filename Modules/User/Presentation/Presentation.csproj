@@ -4,9 +4,12 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>User.Presentation</RootNamespace>
+        <AssemblyName>User.Presentation</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\Common.Presentation\Common.Presentation.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 

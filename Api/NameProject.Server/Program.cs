@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddModulesConfiguration();
 
-builder.ConfigureAppConfiguration();
+//builder.ConfigureAppConfiguration();
 
 builder.Host.UseSerilogCustom();
 
@@ -33,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerConfiguration();
 }
 
+app.MapModuleEndpoints();
+
 app.UseRouting();
 app.UseCors(CorsConfig.MyPolicy);
 
@@ -41,7 +43,7 @@ app.UseExceptionHandler();
 
 app.UseCustomMiddlewares();
 
-app.UseAzureAppConfiguration();
+//app.UseAzureAppConfiguration();
 
 
 

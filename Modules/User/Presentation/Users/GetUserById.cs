@@ -1,6 +1,11 @@
-﻿namespace Presentation.Users;
+﻿using Common.Presentation.Endpoint;
 
-public class GetUserById
+namespace User.Presentation.Users;
+
+public class GetUserById : IEndpoint
 {
-    
+    public void MapEndpoint(IEndpointRouteBuilder e)
+    {
+        //TODO
+    }
 }

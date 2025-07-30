@@ -1,4 +1,4 @@
-﻿namespace Presentation.Users;
+﻿namespace User.Presentation.Users;
 
 public class GetUsers
 {
