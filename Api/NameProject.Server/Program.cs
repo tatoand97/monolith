@@ -15,7 +15,7 @@ builder.Configuration.AddModulesConfiguration();
 
 builder.Host.UseSerilogCustom();
 
-builder.Services.SetupUserModule(builder.Configuration);
+builder.Services.AddModules(builder.Configuration);
 
 builder.Host.UseWolverine(options =>
 {
