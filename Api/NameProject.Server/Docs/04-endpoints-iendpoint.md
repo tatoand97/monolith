@@ -1,12 +1,12 @@
 # Endpoints minimalistas con `IEndpoint`
 
-## Contrato comun
+## Contrato común
 - Los endpoints implementan `Common.Presentation.Endpoint.IEndpoint`.
-- El metodo `MapEndpoint(IEndpointRouteBuilder)` registra rutas y metadatos.
+- El método `MapEndpoint(IEndpointRouteBuilder)` registra rutas y metadatos.
 
-## Registro dinamico
+## Registro dinámico
 - `WebApplication.MapEndpoints` (ver `Common/Common.Presentation/Endpoint/EndpointExtensions.cs`) escanea tipos `IEndpoint` en cada ensamblado.
-- `MapModuleEndpoints` agrega los endpoints de cada modulo durante el arranque (`Api/NameProject.Server/ServiceCollections/EndpointMappingExtensions.cs`).
+- `MapModuleEndpoints` agrega los endpoints de cada módulo durante el arranque (`Api/NameProject.Server/ServiceCollections/EndpointMappingExtensions.cs`).
 - Puedes agrupar rutas personalizadas llamando `app.MapEndpoints(assembly, app.MapGroup("/prefijo"))`.
 
 ## Ejemplo: listado de usuarios
@@ -30,8 +30,8 @@ public class GetUsers(IMessageBus messageBus) : IEndpoint
 }
 ```
 
-## Buenas practicas
+## Buenas prácticas
 - Inyecta dependencias en el constructor del endpoint (record) para aprovechar DI.
 - Usa `[AsParameters]` para mapear objetos de consulta o comando.
 - Reutiliza tipos de respuesta comunes (`PagedResponse`, `Response`) para estandarizar contratos.
-- Define nombres de rutas con `WithName` para integracion con Swagger y link generation.
+- Define nombres de rutas con `WithName` para integración con Swagger y link generation.

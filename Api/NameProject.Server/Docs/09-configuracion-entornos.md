@@ -1,4 +1,4 @@
-# Configuracion y entornos
+# Configuración y entornos
 
 ## Archivos appsettings
 - `ModulesAppSettingsConfig.AddModulesConfiguration` carga `appsettings.json` y `appsettings.{Environment}.json`.
@@ -11,9 +11,9 @@
 ## Azure App Configuration (opcional)
 - Habilita `builder.ConfigureAppConfiguration()` en `Program.cs` si quieres usar `ConfigureServiceExtensions.ConfigureAppConfiguration`.
 - Requiere:
-  - `AppConfiguration:Endpoint` con la URI o cadena de conexion.
+  - `AppConfiguration:Endpoint` con la URI o cadena de conexión.
   - Permisos para `DefaultAzureCredential` (Managed Identity o Azure CLI).
-  - Clave sentinel `Settings.Sentinel` para refresco de configuracion.
+  - Clave sentinel `Settings.Sentinel` para refresco de configuración.
 
 ## Variables de entorno clave
 ```
@@ -26,8 +26,8 @@ DatabaseName=NameProject
 
 ## Matriz sugerida por entorno
 - Development: valores locales, `ASPNETCORE_ENVIRONMENT=Development`, strings a localhost, logs verbose.
-- Certification: configuraciones similares a produccion pero con credenciales de pruebas, habilita health checks y telemetria.
-- Production: usa secretos gestionados (Key Vault, App Secrets), define politicas de rotacion para credenciales y endpoints reales.
+- Certification: configuraciones similares a producción pero con credenciales de pruebas, habilita health checks y telemetría.
+- Production: usa secretos gestionados (Key Vault, App Secrets), define políticas de rotación para credenciales y endpoints reales.
 
 ## Recomendaciones
 - Nunca almacenes credenciales reales en el repositorio; usa secretos locales o Key Vault.

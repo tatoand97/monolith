@@ -1,11 +1,11 @@
-# Respuestas comunes y paginacion
+# Respuestas comunes y paginación
 
 ## Modelos de respuesta
-- `Common.Domain.Responses.Response<T>`: estructura estandar con `Success`, `Message`, `Data`, `Errors`.
+- `Common.Domain.Responses.Response<T>`: estructura estándar con `Success`, `Message`, `Data`, `Errors`.
 - `Common.Domain.Responses.PagedResponse<T>`: hereda de `Response` incorporando `PageNumber`, `PageSize`, `TotalCount`, `Items`.
 
-## Utilidades de paginacion
-- `Common.Domain.Pagination.PaginationParams`: pagina y tamano con valores por defecto.
+## Utilidades de paginación
+- `Common.Domain.Pagination.PaginationParams`: página y tamaño con valores por defecto.
 - `Common.Domain.Pagination.PagedList<T>`: representa resultados paginados desde repositorios.
 
 ## Del repositorio a la API
@@ -43,5 +43,5 @@ return Results.Ok(response);
 
 ## Recomendaciones
 - Propaga mensajes claros en `Response<T>.Succeed` y `Response<T>.Fail`.
-- Mantiene un tamano de pagina por defecto razonable y permitido por la base de datos.
+- Mantén un tamaño de página por defecto razonable y permitido por la base de datos.
 - Evita exponer entidades de dominio directamente; usa DTO dedicados.

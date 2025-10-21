@@ -1,8 +1,8 @@
 # Comandos, consultas y validaciones (Wolverine + FluentValidation)
 
-## Configuracion en Program.cs
+## Configuración en Program.cs
 - `builder.Host.UseWolverine(...)` habilita Wolverine en modo mediator (`DurabilityMode.MediatorOnly`).
-- `options.UseFluentValidation(RegistrationBehavior.ExplicitRegistration)` activa verificaciones de entrada automaticas.
+- `options.UseFluentValidation(RegistrationBehavior.ExplicitRegistration)` activa verificaciones de entrada automáticas.
 - El pipeline registra `CustomFailureAction` (`Utils/Validation/CustomFailureAction.cs`) para transformar errores en `ModelValidationException`.
 - Agrega nuevos ensamblados al discovery con `options.Discovery.IncludeAssembly({Feature}.Application.AssemblyReference.Assembly)`.
 
@@ -20,15 +20,15 @@ public static async Task<Response<RegisterResponse>> Handle(CreateUser command, 
     return Response<RegisterResponse>.Succeed(RegisterResponse.FromId(user.Id, user.Email), "Usuario registrado");
 }
 ```
-- Reutiliza `Common.Domain.Responses.Response<T>` para estandarizar mensajes exito/error.
+- Reutiliza `Common.Domain.Responses.Response<T>` para estandarizar mensajes éxito/error.
 
 ## Consultas con Wolverine
-- Las consultas encapsulan parametros (por ejemplo `GetUsers` hereda de una clase abstracta con `PaginationParams`).
+- Las consultas encapsulan parámetros (por ejemplo `GetUsers` hereda de una clase abstracta con `PaginationParams`).
 - Los handlers devuelven DTO o `PagedList<T>` y se invocan desde endpoints con `IMessageBus.InvokeAsync<TResponse>(query)`.
-- Puedes registrar middlewares Wolverine (policies) para agregar logging o metricas a cada mensaje.
+- Puedes registrar middlewares Wolverine (policies) para agregar logging o métricas a cada mensaje.
 
 ## Validaciones con FluentValidation
-- Registra validadores con `services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly)` dentro del modulo.
+- Registra validadores con `services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly)` dentro del módulo.
 - Los validators se ejecutan antes de los handlers y los errores terminan en `ModelValidationException`, manejada por `GlobalExceptionHandler`.
 - Para reglas complejas, usa `RuleFor(x => x.Email).EmailAddress().WithMessage("Mensaje claro")`.
 
